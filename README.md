@@ -1,6 +1,7 @@
 # Searchef
 
-TODO: Write a gem description
+Stub your Chef searches with pre-canned responses. Good for use when unit
+testing or dummying out a Chef run that uses search calls.
 
 ## Installation
 
@@ -18,7 +19,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Require the library and include the `Searchef::API` module for convenience:
+
+```ruby
+require 'searchef'
+
+include Searchef::API
+```
+
+```ruby
+# stub search for all nodes with the `web_node` role in their run list
+stub_search(:node, "roles:web_node").to_return([
+  node_stub("web1.example.com"),
+  node_stub("web2.example.com")
+])
+
+require 'chef/search/query'
+
+# if running in pry, let's set a node name for signing requests
+Chef::Config[:node_name] = "durr"
+
+# run the search
+query = Chef::Search::Query.new~
+query.search(:node, "roles:web_node")
+
+# => [[node[web1.example.com], node[web2.example.com]], 0, 2]
+```
 
 ## Contributing
 
