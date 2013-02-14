@@ -25,25 +25,25 @@ module Searchef
   class NodeStubCreator
 
     def initialize(name, options = {}, &block)
-      @name     = name
-      @attrs    = options[:attrs] || Hash.new
-      @ohai     = options[:ohai] || Hash.new
-      @platform = options[:platform] || "ubuntu"
-      @version  = options[:version] || "12.04"
-      @block    = block if block_given?
+      @name       = name
+      @attrs      = options[:attrs] || Hash.new
+      @ohai       = options[:ohai] || Hash.new
+      @platform   = options[:platform] || "ubuntu"
+      @version    = options[:version] || "12.04"
+      @node_block = block if block_given?
     end
 
     def create
       node = Chef::Node.new
       node.name(name)
       node.consume_external_attrs(ohai_data, attr_data)
-      node.instance_eval(block) unless block.nil?
+      node.instance_eval(&node_block) unless node_block.nil?
       node
     end
 
     private
 
-    attr_reader :name, :attrs, :ohai, :platform, :version, :block
+    attr_reader :name, :attrs, :ohai, :platform, :version, :node_block
 
     def ohai_data
       fauxhai = Fauxhai.mock(:platform => platform, :version => version).data

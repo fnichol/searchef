@@ -40,7 +40,7 @@ require 'chef/search/query'
 Chef::Config[:node_name] = "durr"
 
 # run the search
-query = Chef::Search::Query.new~
+query = Chef::Search::Query.new
 query.search(:node, "roles:web_node")
 
 # => [[node[web1.example.com], node[web2.example.com]], 0, 2]
