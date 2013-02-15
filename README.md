@@ -46,6 +46,26 @@ query.search(:node, "roles:web_node")
 # => [[node[web1.example.com], node[web2.example.com]], 0, 2]
 ```
 
+You can also stub more complicated nodes with specific data:
+
+```ruby
+# setting a node platform and platform verson
+node_stub("node1.example.com", :platform => "centos", :version => "6.3")
+
+# overriding default fauxhai ohai data
+node_stub("node2.example.com", :ohai => { :ipaddress => "19.2.168.10.1" })
+
+# set node attribute data, such as the run_list
+node_stub("node2.example.com", :attrs => {
+  :run_list => [ 'recipe[common::base]', 'role[load_balancer]' ]
+})
+
+# using a block which provides access to the attributes file dsl methods
+node_stub("node3.example.com", :ohai => { :ipaddress => "10.10.12.27" }) do
+  default['mysql']['tunable']['tmp_table_size'] = "64M"
+end
+```
+
 ## Contributing
 
 1. Fork it
