@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'chef/config'
 require 'webmock'
 require 'uri'
 
@@ -35,7 +36,7 @@ module Searchef
     end
 
     def to_return(objects)
-      stub_request(:get, %r{/search/#{type}}).
+      stub_request(:get, %r{^#{base_url}/search/#{type}}).
         with(:query => hash_including(params)).
         to_return(:headers => response_headers, :body => response_body(objects))
     end
@@ -43,6 +44,10 @@ module Searchef
     private
 
     attr_reader :type, :params
+
+    def base_url
+      Chef::Config[:search_url]
+    end
 
     def escape(string)
       string && URI.escape(string.to_s)
