@@ -21,5 +21,9 @@ require 'searchef/node_stub_creator'
 require 'searchef/search_stub'
 require "searchef/version"
 
+require 'webmock'
+
 module Searchef
 end
+
+WebMock.allow_net_connect!
