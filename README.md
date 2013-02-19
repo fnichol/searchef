@@ -19,6 +19,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Setup
+
 Require the library and include the `Searchef::API` module for convenience:
 
 ```ruby
@@ -26,6 +28,8 @@ require 'searchef'
 
 include Searchef::API
 ```
+
+### Stubbing Node Searches
 
 ```ruby
 # stub search for all nodes with the `web_node` role in their run list
@@ -64,6 +68,34 @@ node_stub("node2.example.com", :attrs => {
 node_stub("node3.example.com", :ohai => { :ipaddress => "10.10.12.27" }) do
   default['mysql']['tunable']['tmp_table_size'] = "64M"
 end
+```
+
+### Stubbing Data Bag Searches
+
+Data bags are a hash of data, so you can return data bag items as an array of
+hashes:
+
+```ruby
+stub_search(:users, 'groups:admin').to_return([
+  {
+    "id" => "adam",
+    "comment" => "Adam Administrator",
+    "groups" => [
+      "admin"
+    ],
+    "ssh_keys" => [],
+    "shell" => "/bin/bash"
+  }
+])
+```
+
+If your `data_bag_path` is setup, you could also fectch the data from a real
+data bag, using the `data_bag_item` method:
+
+```ruby
+stub_search(:users, 'groups:admin').to_return([
+  data_bag_item("users", "adam")
+])
 ```
 
 ## Contributing
