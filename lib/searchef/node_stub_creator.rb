@@ -22,8 +22,22 @@ require 'fauxhai'
 
 module Searchef
 
+  # Class to help generate Chef::Node objects.
   class NodeStubCreator
 
+    # Constructs a creator object which will return a Chef::Node object when
+    # sent the #create message.
+    #
+    # @param name [String] the node name
+    # @param options [Hash] options
+    # @option options [Hash] :attrs (Hash.new) node attributes
+    # @option options [Hash] :ohai (Hash.new) ohai attributes, overriding fake
+    #   data provided by Fauxhai
+    # @option options [Hash] :platform ("ubuntu") ohai platform name for the
+    #   node
+    # @option options [Hash] :version ("12.04") ohai platform version for the
+    #   node
+    #
     def initialize(name, options = {}, &block)
       @name       = name
       @attrs      = options[:attrs] || Hash.new
@@ -33,6 +47,10 @@ module Searchef
       @node_block = block if block_given?
     end
 
+    # Creates and returns a Chef::Node object.
+    #
+    # @return [Chef::Node] a Chef node object
+    #
     def create
       node = Chef::Node.new
       node.name(name)

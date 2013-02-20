@@ -16,14 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'webmock'
+
 require 'searchef/api'
 require 'searchef/node_stub_creator'
 require 'searchef/search_stub'
 require "searchef/version"
 
-require 'webmock'
-
 module Searchef
 end
 
+# Allow outbound network connections for unmocked http requests
 WebMock.allow_net_connect!

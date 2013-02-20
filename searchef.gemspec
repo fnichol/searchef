@@ -20,4 +20,13 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'chef'
   gem.add_runtime_dependency 'webmock'
   gem.add_runtime_dependency 'fauxhai'
+
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'guard-minitest'
+
+  gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'cane'
+  gem.add_development_dependency 'guard-cane'
+  gem.add_development_dependency 'tailor'
+  gem.add_development_dependency 'countloc'
 end

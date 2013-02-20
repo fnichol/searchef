@@ -16,7 +16,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module Searchef
+require 'simplecov'
+SimpleCov.adapters.define 'gem' do
+  command_name 'Specs'
 
-  VERSION = "0.1.1"
+  add_filter '.gem/'
+  add_filter '/spec/'
+  add_filter '/lib/vendor/'
+
+  add_group 'Libraries', '/lib/'
 end
+SimpleCov.start 'gem'
+
+require 'minitest/autorun'

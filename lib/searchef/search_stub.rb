@@ -22,10 +22,24 @@ require 'uri'
 
 module Searchef
 
+  # A stubbed out Chef search request and response. The test double is
+  # introduced at the network layer.
+  #
+  # @author Fletcher Nichol <fnichol@nichol.ca>
+  #
   class SearchStub
 
     include WebMock::API
 
+    # Constructs a new stubbed search request. If the optional parameters such
+    # as `query` and `sort` are not specified then any value for these
+    # parameters will be matched. For example, if the `query` parameter is not
+    # provided then the following search calls will be matched and stubbed:
+    #
+    # * search(:node)
+    # * search(:node, "*:*")
+    # * search(:node, "totallybogusentry")
+    #
     def initialize(type, query, sort, start, rows)
       @type = type
       @params = Hash.new
