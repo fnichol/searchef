@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'fauxhai'
 
   gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'guard-minitest'
 
   gem.add_development_dependency 'simplecov'

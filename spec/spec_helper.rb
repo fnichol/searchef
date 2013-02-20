@@ -29,3 +29,4 @@ end
 SimpleCov.start 'gem'
 
 require 'minitest/autorun'
+require 'mocha/setup'

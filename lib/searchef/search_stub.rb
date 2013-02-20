@@ -17,8 +17,9 @@
 # limitations under the License.
 
 require 'chef/config'
-require 'webmock'
+require 'json'
 require 'uri'
+require 'webmock'
 
 module Searchef
 
@@ -61,10 +62,6 @@ module Searchef
 
     def base_url
       Chef::Config[:search_url]
-    end
-
-    def escape(string)
-      string && URI.escape(string.to_s)
     end
 
     def response_headers
