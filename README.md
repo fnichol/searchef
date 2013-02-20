@@ -1,5 +1,8 @@
 # Searchef
 
+[![Build Status](https://travis-ci.org/fnichol/searchef.png?branch=master)](https://travis-ci.org/fnichol/searchef)
+[![Code Climate](https://codeclimate.com/github/fnichol/searchef.png)](https://codeclimate.com/github/fnichol/searchef)
+
 Stub your Chef searches with pre-canned responses. Good for use when unit
 testing or dummying out a Chef run that uses search calls.
 
