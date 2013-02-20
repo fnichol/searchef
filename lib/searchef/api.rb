@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'webmock'
+
 module Searchef
 
   module API
@@ -92,6 +94,12 @@ module Searchef
     #
     def node_stub(name, options = {}, &block)
       NodeStubCreator.new(name, options, &block).create
+    end
+
+    # Clears all stubbed searches that have been defined.
+    #
+    def clear_stub_searches!
+      WebMock.reset!
     end
   end
 end

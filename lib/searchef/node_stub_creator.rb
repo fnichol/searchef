@@ -23,6 +23,9 @@ require 'fauxhai'
 module Searchef
 
   # Class to help generate Chef::Node objects.
+  #
+  # @author Fletcher Nichol <fnichol@nichol.ca>
+  #
   class NodeStubCreator
 
     # Constructs a creator object which will return a Chef::Node object when
