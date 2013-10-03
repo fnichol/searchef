@@ -19,7 +19,7 @@
 require 'webmock'
 
 module Searchef
-
+  # Holds the stub methods, much like Webmock::API
   module API
 
     extend self
