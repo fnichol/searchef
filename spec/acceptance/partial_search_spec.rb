@@ -52,10 +52,10 @@ describe "Node Search" do
       ])
     end
 
-=begin
     it "matches with no additonal search parameters" do
+      nodes = partial_search(:node, "query")
+      assert_equal [{ "data" => { "ip" => '10.1.2.3' } }, { "data" => { "ip" => '192.168.9.10' } }], nodes
     end
-=end
 
     it "matches with arbitrary search parameters" do
       nodes = partial_search(:node, "query", :keys => {"ip" => %w{ohai ipaddress}})
