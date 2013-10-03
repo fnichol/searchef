@@ -33,7 +33,8 @@ describe "Node Search" do
 
     Chef::Config[:node_name] = "acceptance"
     Chef::Config[:client_key] = nil
-    Chef::Config[:search_url] = Chef::Config[:chef_server_url] = "http://fakeserver:666"
+    Chef::Config[:search_url] = "http://fakeserver:666"
+    Chef::Config[:chef_server_url] = Chef::Config[:search_url]
   end
 
   after do
@@ -54,12 +55,22 @@ describe "Node Search" do
 
     it "matches with no additonal search parameters" do
       nodes = partial_search(:node, "query")
-      assert_equal [{ "data" => { "ip" => '10.1.2.3' } }, { "data" => { "ip" => '192.168.9.10' } }], nodes
+
+      data = [
+        { "data" => { "ip" => '10.1.2.3' } },
+        { "data" => { "ip" => '192.168.9.10' } }
+      ]
+      assert_equal data, nodes
     end
 
     it "matches with arbitrary search parameters" do
       nodes = partial_search(:node, "query", :keys => {"ip" => %w{ohai ipaddress}})
-      assert_equal [{ "ip" => '10.1.2.3' }, { "ip" => '192.168.9.10' }], nodes
+
+      data = [
+        {"ip" => '10.1.2.3' },
+        { "ip" => '192.168.9.10' }
+      ]
+      assert_equal data, nodes
     end
   end
 

@@ -23,11 +23,12 @@ require 'searchef/search_stub'
 describe Searchef::SearchStub do
 
   let(:request)     { mock('RequestStub') }
+  let(:search_regex) { %r{https?://localhost:(4000|443)/search/node} }
 
   it "sets up a stub_request" do
     WebMock::RequestStub.expects(:new).with { |method, uri_regex|
       method == :get &&
-      uri_regex.source.gsub(/\\/, '') =~ %r{https?://localhost:(4000|443)/search/node}
+      uri_regex.source.gsub(/\\/, '') =~ search_regex
     }.returns(request)
 
     request.expects(:with).with(
@@ -52,7 +53,7 @@ describe Searchef::SearchStub do
     rows = 43
 
     WebMock::RequestStub.expects(:new).with { |method, uri_regex|
-      uri_regex.source.gsub(/\\/, '') =~ %r{https?://localhost:(4000|443)/search/role}
+      uri_regex.source.gsub(/\\/, '') =~ search_regex
     }.returns(request)
 
     request.expects(:with).with(:query => {

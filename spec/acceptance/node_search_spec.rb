@@ -36,7 +36,10 @@ describe "Node Search" do
 
     Chef::Config[:node_name] = "acceptance"
     Chef::Config[:client_key] = nil
-    Chef::Config[:search_url] = Chef::Config[:chef_server_url] = "http://fakeserver:666"
+    Chef::Config[:search_url] = "http://fakeserver:666"
+
+    # Needed for 11.6
+    Chef::Config[:chef_server_url] = Chef::Config[:search_url]
   end
 
   after do
