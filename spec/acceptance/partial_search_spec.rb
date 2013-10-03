@@ -64,7 +64,8 @@ describe "Node Search" do
     end
 
     it "matches with arbitrary search parameters" do
-      nodes = partial_search(:node, "query", :keys => {"ip" => %w{ohai ipaddress}})
+      nodes = partial_search(:node, "query",
+        :keys => {"ip" => %w{ohai ipaddress}})
 
       data = [
         {"ip" => '10.1.2.3' },
