@@ -15,7 +15,7 @@ module Searchef
 
     def response_body(objects)
       objects = [objects] unless objects.is_a?(Array)
-      super(objects.map {|obj| { "data" => obj }})
+      super(objects.map { |obj| { "data" => obj } })
     end
   end
 end
