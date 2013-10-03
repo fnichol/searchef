@@ -30,17 +30,17 @@ describe "Node Search" do
 
   before do
     @saved_state = Hash.new
-    [:node_name, :client_key, :search_url].each do |key|
+    [:node_name, :client_key, :search_url, :chef_server_url].each do |key|
       @saved_state[key] = Chef::Config[key]
     end
 
     Chef::Config[:node_name] = "acceptance"
     Chef::Config[:client_key] = nil
-    Chef::Config[:search_url] = "http://fakeserver:666"
+    Chef::Config[:search_url] = Chef::Config[:chef_server_url] = "http://fakeserver:666"
   end
 
   after do
-    [:node_name, :client_key, :search_url].each do |key|
+    [:node_name, :client_key, :search_url, :chef_server_url].each do |key|
       Chef::Config[key] = @saved_state.delete(key)
     end
 

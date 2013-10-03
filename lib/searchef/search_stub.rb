@@ -61,7 +61,7 @@ module Searchef
     attr_reader :type, :params
 
     def base_url
-      Chef::Config[:search_url]
+      Chef::Config[:search_url] || Chef::Config[:chef_server_url]
     end
 
     def response_headers
