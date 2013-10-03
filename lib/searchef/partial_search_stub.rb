@@ -1,7 +1,4 @@
-require 'chef/config'
-require 'json'
-require 'uri'
-require 'webmock'
+require 'searchef/search_stub'
 
 module Searchef
 

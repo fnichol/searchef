@@ -17,12 +17,11 @@
 # limitations under the License.
 
 require_relative '../spec_helper'
-
 require_relative '../../vendor/partial_search/libraries/partial_search'
 
 require 'searchef'
 
-describe "Node Search" do
+describe "Partial Search" do
   include Searchef::API
 
   before do
@@ -45,7 +44,7 @@ describe "Node Search" do
     clear_stub_searches!
   end
 
-  describe "greedy search stub" do
+  describe "partial search stub" do
     before do
       stub_partial_search(:node).to_return([
         { "ip" => '10.1.2.3' },
@@ -68,64 +67,10 @@ describe "Node Search" do
         :keys => {"ip" => %w{ohai ipaddress}})
 
       data = [
-        {"ip" => '10.1.2.3' },
+        { "ip" => '10.1.2.3' },
         { "ip" => '192.168.9.10' }
       ]
       assert_equal data, nodes
     end
   end
-
-=begin
-  describe "strict search stub" do
-
-    before do
-      stub_search(:node, "roles:mysql", "ASC", 2, 99).to_return([
-        node_stub("one", :ohai => { :ipaddress => '10.1.2.3' }),
-        node_stub("two", :ohai => { :ipaddress => '192.168.9.10' })
-      ])
-    end
-
-    it "matches a fully qualified search" do
-      nodes, start, total = query.search(:node, "roles:mysql", "ASC", 2, 99)
-
-      start.must_equal 0
-      total.must_equal 2
-      nodes.first.ipaddress.must_equal '10.1.2.3'
-      nodes.last.ipaddress.must_equal '192.168.9.10'
-    end
-
-    it "does not match with a different query parameter" do
-      proc { query.search(:node, "*:*", "ASC", 2, 99) }.must_raise SocketError
-    end
-  end
-
-  describe "overlapping search stubs" do
-
-    before do
-      stub_search(:node).to_return([
-        node_stub("allthethings")
-      ])
-
-      stub_search(:node, "platform:ubuntu", "eh", 6, 10).to_return([
-        node_stub("uby")
-      ])
-    end
-
-    it "performing the narrower search match returns uby" do
-      nodes, start, total = query.search(:node, "platform:ubuntu", "eh", 6, 10)
-
-      start.must_equal 0
-      total.must_equal 1
-      nodes.first.name.must_equal 'uby'
-    end
-
-    it "performing a fuzzier search returns allthethings" do
-      nodes, start, total = query.search(:node, "recipes:*", "eh")
-
-      start.must_equal 0
-      total.must_equal 1
-      nodes.first.name.must_equal 'allthethings'
-    end
-  end
-=end
 end

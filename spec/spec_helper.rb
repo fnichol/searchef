@@ -25,7 +25,7 @@ SimpleCov.adapters.define 'gem' do
 
   add_filter '.gem/'
   add_filter '/spec/'
-  add_filter '/lib/vendor/'
+  add_filter '/vendor/'
 
   add_group 'Libraries', '/lib/'
 end
