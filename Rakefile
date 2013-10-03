@@ -24,4 +24,9 @@ task :stats do
   sh "countloc -r spec"
 end
 
-task :default => [:test, :cane, :tailor, :stats]
+desc "Update partial_search submodule"
+task :update_submodules do
+  `git submodule update --init`
+end
+
+task :default => [:update_submodules, :test, :cane, :tailor, :stats]

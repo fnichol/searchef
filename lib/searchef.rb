@@ -21,10 +21,8 @@ require 'webmock'
 require 'searchef/api'
 require 'searchef/node_stub_creator'
 require 'searchef/search_stub'
+require 'searchef/partial_search_stub'
 require "searchef/version"
-
-module Searchef
-end
 
 # Allow outbound network connections for unmocked http requests
 WebMock.allow_net_connect!
