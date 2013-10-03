@@ -16,7 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'bundler/setup'
+
 require 'simplecov'
+
 SimpleCov.adapters.define 'gem' do
   command_name 'Specs'
 
@@ -26,6 +29,7 @@ SimpleCov.adapters.define 'gem' do
 
   add_group 'Libraries', '/lib/'
 end
+
 SimpleCov.start 'gem'
 
 require 'minitest/autorun'
