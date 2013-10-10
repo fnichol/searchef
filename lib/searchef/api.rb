@@ -68,7 +68,8 @@ module Searchef
     # @example Stub all searches in the node index to return an empty list
     #   stub_partial_search(:node).to_return([])
     # @example Stub a data bag search for users in the admin group
-    #   stub_partial_search(:users, 'groups:admin', :keys => {"ip" => %w{ohai ipaddress}}).to_return([
+    #   stub_partial_search(:users, 'groups:admin',
+    #     :keys => {"ip" => %w{ohai ipaddress}}).to_return([
     #     { "ip" => '10.1.2.3' },
     #     { "ip" => '192.168.9.10' }
     #   ])
