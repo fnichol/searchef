@@ -66,31 +66,15 @@ module Searchef
     # Stubs out a Chef partial_search call at the network layer.
     #
     # @example Stub all searches in the node index to return an empty list
-    #   stub_search(:node).to_return([])
-    # @example Stub a search for nodes with a web_server role
-    #   stub_search(:node, "roles:web_node").to_return([
-    #     node_stub("web1.local"),
-    #     node_stub("web2.local")
-    #   ])
+    #   stub_partial_search(:node).to_return([])
     # @example Stub a data bag search for users in the admin group
-    #   stub_search(:users, 'groups:admin').to_return([
-    #     {
-    #       "id" => "adam",
-    #       "comment" => "Adam Administrator",
-    #       "groups" => [
-    #         "admin"
-    #       ],
-    #       "ssh_keys" => [],
-    #       "shell" => "/bin/bash"
-    #     }
-    #   ])
-    # @example Stub a data bag search with actual data bag item content
-    #   stub_search(:users, 'groups:admin').to_return([
-    #     data_bag_item("users", "adam")
+    #   stub_partial_search(:users, 'groups:admin', :keys => {"ip" => %w{ohai ipaddress}}).to_return([
+    #     { "ip" => '10.1.2.3' },
+    #     { "ip" => '192.168.9.10' }
     #   ])
     #
-    # @see Searchef::SearchStub
-    # @see Searchef::SearchStub#to_return
+    # @see Searchef::PartialSearchStub
+    # @see Searchef::PartialSearchStub#to_return
     #
     # @param type [String,Symbol]
     # @param query [String]
