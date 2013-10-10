@@ -51,17 +51,23 @@ module Searchef
     end
 
     def to_return(objects)
-      stub_request(:get, %r{^#{base_url}/search/#{type}}).
+      stub_request(self.class.stub_method, %r{^#{base_url}/search/#{type}}).
         with(:query => hash_including(params)).
         to_return(:headers => response_headers, :body => response_body(objects))
     end
 
-    private
+    protected
 
     attr_reader :type, :params
 
+    class << self
+      attr_accessor :stub_method
+    end
+
+    self.stub_method = :get
+
     def base_url
-      Chef::Config[:search_url]
+      Chef::Config[:search_url] || Chef::Config[:chef_server_url]
     end
 
     def response_headers

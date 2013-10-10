@@ -19,7 +19,7 @@
 require 'webmock'
 
 module Searchef
-
+  # Holds the stub methods, much like Webmock::API
   module API
 
     extend self
@@ -59,8 +59,32 @@ module Searchef
     # @param start [String,Integer]
     # @param rows [String,Integer]
     #
-    def stub_search(type, query=nil, sort=nil, start=nil, rows=nil, &block)
+    def stub_search(type, query=nil, sort=nil, start=nil, rows=nil)
       SearchStub.new(type, query, sort, start, rows)
+    end
+
+    # Stubs out a Chef partial_search call at the network layer.
+    #
+    # @example Stub all searches in the node index to return an empty list
+    #   stub_partial_search(:node).to_return([])
+    # @example Stub a data bag search for users in the admin group
+    #   stub_partial_search(:users, 'groups:admin',
+    #     :keys => {"ip" => %w{ohai ipaddress}}).to_return([
+    #     { "ip" => '10.1.2.3' },
+    #     { "ip" => '192.168.9.10' }
+    #   ])
+    #
+    # @see Searchef::PartialSearchStub
+    # @see Searchef::PartialSearchStub#to_return
+    #
+    # @param type [String,Symbol]
+    # @param query [String]
+    # @param sort [String]
+    # @param start [String,Integer]
+    # @param rows [String,Integer]
+    #
+    def stub_partial_search(type, query=nil, sort=nil, start=nil, rows=nil)
+      PartialSearchStub.new(type, query, sort, start, rows)
     end
 
     # Creates a new Chef::Node object suitable for using in a stubbed search

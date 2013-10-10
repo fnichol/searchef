@@ -1,0 +1,3 @@
+[submodule "vendor/partial_search"]
+	path = vendor/partial_search
+	url = https://github.com/opscode-cookbooks/partial_search.git

@@ -16,16 +16,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'bundler/setup'
+
 require 'simplecov'
+
 SimpleCov.adapters.define 'gem' do
   command_name 'Specs'
 
   add_filter '.gem/'
   add_filter '/spec/'
-  add_filter '/lib/vendor/'
+  add_filter '/vendor/'
 
   add_group 'Libraries', '/lib/'
 end
+
 SimpleCov.start 'gem'
 
 require 'minitest/autorun'
